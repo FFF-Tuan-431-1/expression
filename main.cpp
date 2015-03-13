@@ -12,6 +12,9 @@ bool checkBracket(char ch);
 bool checkStack(char ch, stack<char> tempStack);
 bool checkPriority(char one, char two);
 int getPriority(char temp);
+int getValue(string suffix);
+int charToInt(char ch);
+int calculate(char opera, int a, int b);
 
 int main(){
     string expression;
@@ -24,10 +27,10 @@ int main(){
     suffixExpression = change(expression, suffixExpression);
 
     //cout<<expression<<endl;
-    cout<<suffixExpression;
+    cout<<suffixExpression<<endl;
 
-    int j;
-    cin>>j;
+    int j = getValue(suffixExpression);
+    cout<<j;
 
     return 0;
 }
@@ -141,6 +144,52 @@ string change(string infix, string suffix){
 
     int size = suffix.find('@', 0);
     string subSuffix = suffix.substr(0, size);
+    subSuffix += '#';
 
     return subSuffix;
+}
+
+int getValue(string suffix){
+    stack<int> numberStack;
+
+    for(int i = 0; suffix[i] != '#'; i++){
+        if(checkNum(suffix[i]))
+            numberStack.push(charToInt(suffix[i]));
+        else{
+            int b = numberStack.top();
+            numberStack.pop();
+            int a = numberStack.top();
+            numberStack.pop();
+            numberStack.push(calculate(suffix[i], a, b));
+        }
+    }
+
+    return numberStack.top();
+}
+
+int charToInt(char ch){
+    int num;
+    num = (int)(ch - '0');
+    return num;
+}
+
+int calculate(char opera, int a, int b){
+    int result = 0;
+
+    switch (opera){
+        case '+':
+            result = a + b;
+            break;
+        case '-':
+            result = a - b;
+            break;
+        case '*':
+            result = a * b;
+            break;
+        case '/':
+            result = a / b;
+            break;
+    }
+
+    return result;
 }

@@ -8,13 +8,19 @@ void printff(stack<int> c);
 string change(string infix, string suffix);
 bool checkNum(char ch);
 bool checkOperator(char ch);
-bool checkBracket(char ch);
+bool checkLBracket(char ch);
+bool checkRBracket(char ch);
 bool checkStack(char ch, stack<char> tempStack);
 bool checkPriority(char one, char two);
 int getPriority(char temp);
 int getValue(string suffix);
 int charToInt(char ch);
 int calculate(char opera, int a, int b);
+bool checkError(string infix);
+bool stateNum(string infix, int i, int& lb);
+bool stateOper(string infix, int i, int& lb);
+bool stateLBra(string infix, int i, int& lb);
+bool stateRBra(string infix, int i, int& lb);
 
 int main(){
     string expression;
@@ -22,15 +28,19 @@ int main(){
     cin>> expression;
     expression += '#';
 
+    while(!checkError(expression)){
+        cout<<"error"<<endl<<"input again"<<endl;
+        cin>> expression;
+        expression += '#';
+    }
     string suffixExpression = expression;
 
     suffixExpression = change(expression, suffixExpression);
 
-    //cout<<expression<<endl;
     cout<<suffixExpression<<endl;
 
-    int j = getValue(suffixExpression);
-    cout<<j;
+    int result = getValue(suffixExpression);
+    cout<<result;
 
     return 0;
 }
@@ -57,7 +67,14 @@ bool checkOperator(char ch){
         return false;
 }
 
-bool checkBracket(char ch){
+bool checkLBracket(char ch){
+    if (ch == '(')
+        return true;
+    else
+        return false;
+}
+
+bool checkRBracket(char ch){
     if (ch == ')')
         return true;
     else
@@ -115,7 +132,7 @@ string change(string infix, string suffix){
             j++;
         }
         else{
-            if(!checkBracket(infix[i])){
+            if(!checkRBracket(infix[i])){
                 while(checkStack(infix[i], operatorStack) == false && operatorStack.top() != '('){
                     suffix[j] = operatorStack.top();
                     j++;
@@ -192,4 +209,107 @@ int calculate(char opera, int a, int b){
     }
 
     return result;
+}
+
+bool checkError(string infix){
+    bool error = true;
+    int leftBracket = 0;
+
+    if(checkNum(infix[0])){
+        error = stateNum(infix, 0, leftBracket);
+    }
+    else if(checkLBracket(infix[0])){
+        error = stateLBra(infix, 0, leftBracket);
+    }
+    else
+        error = false;
+
+    if(error == true && leftBracket == 0)
+        return true;
+    else
+        return false;
+
+
+
+}
+
+bool stateNum(string infix, int i, int& lb){
+    bool error;
+
+    i++;
+
+    if(infix[i] != '#'){
+        if(checkOperator(infix[i])){
+            error = stateOper(infix, i, lb);
+        }
+        else if(checkRBracket(infix[i])){
+            error = stateRBra(infix, i ,lb);
+        }
+        else
+            error = false;
+    }
+    else
+        error = true;
+
+    return error;
+}
+
+bool stateOper(string infix, int i, int& lb){
+    bool error;
+
+    i++;
+
+    if(infix[i] != '#'){
+        if(checkNum(infix[i])){
+            error = stateNum(infix, i, lb);
+        }
+        else if(checkLBracket(infix[i])){
+            error = stateLBra(infix, i, lb);
+        }
+        else
+            error = false;
+    }
+    else
+        error = false;
+
+    return error;
+
+}
+
+bool stateLBra(string infix, int i, int& lb){
+    bool error;
+
+    i++;
+    lb++;
+
+    if(infix[i] != '#'){
+        if(checkNum(infix[i])){
+            error = stateNum(infix, i, lb);
+        }
+        else
+            error = false;
+    }
+    else
+        error = false;
+
+    return error;
+}
+
+bool stateRBra(string infix, int i, int& lb){
+    bool error;
+
+    i++;
+    lb--;
+
+    if(infix[i] !='#'){
+        if(checkOperator(infix[i])){
+            error = stateOper(infix, i, lb);
+        }
+        else
+            error = false;
+    }
+    else
+        error = true;
+
+    return error;
 }

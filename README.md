@@ -1,1 +1,23 @@
-# ÎÄµµ## ×Óº¯Êı¹¦ÄÜ````void printff(stack<int> c);//´òÓ¡Õ»ÖĞËùÓĞÔªËØstring change(string infix, string suffix);//ÊµĞĞ½«ÖĞ×º±í´ïÊ½×ª±ä³Éºó×º±í´ïÊ½bool checkNum(char ch);//ÅĞ¶ÏÊÇ·ñÎªÊı×Öbool checkOperator(char ch);//ÅĞ¶ÏÊÇ·ñÎª²Ù×÷·ûbool checkBracket(char ch);//ÅĞ¶ÏÊÇ·ñÎªÀ¨ºÅbool checkStack(char ch, stack<char> tempStack);//ÅĞ¶ÏÊÇ·ñ½«µ±Ç°µÄ²Ù×÷·ûÈëÕ»bool checkPriority(char one, char two);//±È½ÏÕâÁ½¸ö²Ù×÷·ûµÄÓÅÏÈ¼¶int getPriority(char temp);//»ñÈ¡µ±Ç°²Ù×÷·ûµÄÓÅÏÈ¼¶±ğint getValue(string suffix);//¼ÆËãµ±Ç°ºó×º±í´ïÊ½µÄÖµint charToInt(char ch);//½«×Ö·ûÀàĞÍµÄÊı×Ö×ª»»³ÉÕûĞÍint calculate(char opera, int a, int b);//¼ÆËãÊıÖµaºÍÊıÖµbµÄ(operate)²Ù×÷````
+# æ–‡æ¡£
+
+## å­å‡½æ•°åŠŸèƒ½
+
+````
+void printff(stack<int> c);//æ‰“å°æ ˆä¸­æ‰€æœ‰å…ƒç´ 
+string change(string infix, string suffix);//å®è¡Œå°†ä¸­ç¼€è¡¨è¾¾å¼è½¬å˜æˆåç¼€è¡¨è¾¾å¼
+bool checkNum(char ch);//åˆ¤æ–­æ˜¯å¦ä¸ºæ•°å­—
+bool checkOperator(char ch);//åˆ¤æ–­æ˜¯å¦ä¸ºæ“ä½œç¬¦
+bool checkLBracket(char ch);//åˆ¤æ–­æ˜¯å¦ä¸ºå·¦æ‹¬å·
+bool checkRBracket(char ch);//åˆ¤æ–­æ˜¯å¦ä¸ºå³æ‹¬å·
+bool checkStack(char ch, stack<char> tempStack);//åˆ¤æ–­æ˜¯å¦å°†å½“å‰çš„æ“ä½œç¬¦å…¥æ ˆ
+bool checkPriority(char one, char two);//æ¯”è¾ƒè¿™ä¸¤ä¸ªæ“ä½œç¬¦çš„ä¼˜å…ˆçº§
+int getPriority(char temp);//è·å–å½“å‰æ“ä½œç¬¦çš„ä¼˜å…ˆçº§åˆ«
+int getValue(string suffix);//è®¡ç®—å½“å‰åç¼€è¡¨è¾¾å¼çš„å€¼
+int charToInt(char ch);//å°†å­—ç¬¦ç±»å‹çš„æ•°å­—è½¬æ¢æˆæ•´å‹
+int calculate(char opera, int a, int b);//è®¡ç®—æ•°å€¼aå’Œæ•°å€¼bçš„(operate)æ“ä½œ
+bool checkError(string infix);//æ£€æŸ¥è¾“å…¥çš„ä¸­ç¼€è¡¨è¾¾å¼æ˜¯å¦æœ‰é”™
+bool stateNum(string infix, int i, int& lb);//å½“å‰å­—ç¬¦ä¸ºæ•°å­—çš„çŠ¶æ€
+bool stateOper(string infix, int i, int& lb);//å½“å‰å­—ç¬¦ä¸ºæ“ä½œç¬¦çš„çŠ¶æ€
+bool stateLBra(string infix, int i, int& lb);//å½“å‰å­—ç¬¦ä¸ºå·¦æ‹¬å·çš„çŠ¶æ€
+bool stateRBra(string infix, int i, int& lb);//å½“å‰å­—ç¬¦ä¸ºå³æ‹¬å·çš„çŠ¶æ€
+````

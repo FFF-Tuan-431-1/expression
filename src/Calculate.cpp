@@ -81,7 +81,9 @@ string Calculate::getSuffix() {
        else {
            suffixString += suffixExpression[i].opt;
        }
-       suffixString += " ";
+       if (i != (suffixExpression.size()-1)) {
+           suffixString += " ";
+       }
     }
     return suffixString;
 }

@@ -45,22 +45,17 @@ Calculate::Calculate(string s) {
     infix = s + '#';
 }
 
-void Calculate::inspirit(string s) {
+void Calculate::setExpression(string s) {
     infix = s + '#';
 }
 
-
-void Calculate::pri() {
-    cout << infix << endl;
-}
-
-int Calculate::getValue() {
+int Calculate::getAnswer() {
     stack<int> numberStack;
 
     Suffix suffix(infix);
-    string suffixExpression = suffix.change();
+    string suffixExpression = suffix.getSuffix();
     for (int i = 0; suffixExpression[i] != '#'; i++) {
-        if (Util::checkNum(suffixExpression[i]))
+        if (Util::isNumber(suffixExpression[i]))
             numberStack.push(charToInt(suffixExpression[i]));
         else {
             int b = numberStack.top();
@@ -74,14 +69,8 @@ int Calculate::getValue() {
     return numberStack.top();
 }
 
-void Calculate::work() {
+bool Calculate::isError() {
     Check check(infix);
-
-    if (check.checkError()) {
-        cout << getValue() << endl;
-    }
-    else
-        cout << "error" << endl;
+    return  !check.checkError();
 }
-
 

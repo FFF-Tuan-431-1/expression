@@ -11,14 +11,14 @@
 using namespace std;
 
 bool Suffix::checkStack(char ch, stack<char> tempStack) {
-    if (tempStack.empty() == true || checkPriority(ch, tempStack.top()) == true)
+    if (tempStack.empty() || checkPriority(ch, tempStack.top()))
         return true;
     else
         return false;
 }
 
-bool Suffix::checkPriority(char one, char two) {
-    if (getPriority(one) > getPriority(two))
+bool Suffix::checkPriority(char first, char second) {
+    if (getPriority(first) > getPriority(second))
         return true;
     else
         return false;
@@ -57,17 +57,17 @@ Suffix::Suffix(string s) {
     infix = s;
 }
 
-string Suffix::change() {
+string Suffix::getSuffix() {
     string suffix = infix;
     int j = 0;
     stack<char> operatorStack;
     for (int i = 0; infix[i] != '#'; i++) {
-        if (Util::checkNum(infix[i])) {
+        if (Util::isNumber(infix[i])) {
             suffix[j] = infix[i];
             j++;
         }
         else {
-            if (!Util::checkRBracket(infix[i])) {
+            if (!Util::isRightBracket(infix[i])) {
                 while (!checkStack(infix[i], operatorStack) && operatorStack.top() != '(') {
                     suffix[j] = operatorStack.top();
                     j++;

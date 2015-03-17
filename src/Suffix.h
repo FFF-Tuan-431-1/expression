@@ -16,7 +16,7 @@ public:
     Suffix(string s);
 
     //实行将中缀表达式转变成后缀表达式
-    string change();
+    string getSuffix();
 
 private:
     //将要被转后缀的中缀表达式
@@ -26,7 +26,7 @@ private:
     bool checkStack(char ch, stack<char> tempStack);
 
     //比较这两个操作符的优先级
-    bool checkPriority(char one, char two);
+    bool checkPriority(char first, char second);
 
     //获取当前操作符的优先级别
     int getPriority(char temp);

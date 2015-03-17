@@ -15,10 +15,10 @@ bool Check::stateNum(int i, int &lb) {
     i++;
 
     if (infix[i] != '#') {
-        if (Util::checkOperator(infix[i])) {
+        if (Util::isOperator(infix[i])) {
             error = stateOper(i, lb);
         }
-        else if (Util::checkRBracket(infix[i])) {
+        else if (Util::isRightBracket(infix[i])) {
             error = stateRBra(i, lb);
         }
         else
@@ -36,10 +36,10 @@ bool Check::stateOper(int i, int &lb) {
     i++;
 
     if (infix[i] != '#') {
-        if (Util::checkNum(infix[i])) {
+        if (Util::isNumber(infix[i])) {
             error = stateNum(i, lb);
         }
-        else if (Util::checkLBracket(infix[i])) {
+        else if (Util::isLeftBracket(infix[i])) {
             error = stateLBra(i, lb);
         }
         else
@@ -59,8 +59,11 @@ bool Check::stateLBra(int i, int &lb) {
     lb++;
 
     if (infix[i] != '#') {
-        if (Util::checkNum(infix[i])) {
+        if (Util::isNumber(infix[i])) {
             error = stateNum(i, lb);
+        }
+        else if (Util::isLeftBracket(infix[i])) {
+            error = stateLBra(i, lb);
         }
         else
             error = false;
@@ -78,8 +81,11 @@ bool Check::stateRBra(int i, int &lb) {
     lb--;
 
     if (infix[i] != '#') {
-        if (Util::checkOperator(infix[i])) {
+        if (Util::isOperator(infix[i])) {
             error = stateOper(i, lb);
+        }
+        else if (Util::isRightBracket(infix[i])) {
+            error = stateRBra(i, lb);
         }
         else
             error = false;
@@ -98,10 +104,10 @@ bool Check::checkError() {
     bool error = true;
     int leftBracket = 0;
 
-    if (Util::checkNum(infix[0])) {
+    if (Util::isNumber(infix[0])) {
         error = stateNum(0, leftBracket);
     }
-    else if (Util::checkLBracket(infix[0])) {
+    else if (Util::isLeftBracket(infix[0])) {
         error = stateLBra(0, leftBracket);
     }
     else

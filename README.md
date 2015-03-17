@@ -73,17 +73,14 @@ public:
     //构造函数
     Calculate(string s);
 
-    //改变中缀表达式
-    void inspirit(string s);
-
-    //打印中缀表达式
-    void pri();
+    //设置需要计算的表达式
+    void setExpression(string s);
 
     //计算当前后缀表达式的值
-    int getValue();
+    int getAnswer();
 
-    //进行工作
-    void work();
+    //判断算式是否错误
+    bool isError();
 
 private:
     //输入的将要被求值的中缀表达式

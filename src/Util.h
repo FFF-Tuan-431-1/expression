@@ -9,16 +9,16 @@
 class Util {
 public:
     //判断是否为数字
-    static bool checkNum(char ch);
+    static bool isNumber(char ch);
 
     //判断是否为操作符
-    static bool checkOperator(char ch);
+    static bool isOperator(char ch);
 
     //判断是否为左括号
-    static bool checkLBracket(char ch);
+    static bool isLeftBracket(char ch);
 
     //判断是否为右括号
-    static bool checkRBracket(char ch);
+    static bool isRightBracket(char ch);
 };
 
 

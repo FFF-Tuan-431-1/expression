@@ -10,6 +10,10 @@ int main() {
 
     cin >> input;
     Calculate calculate(input);
-    calculate.work();
+    if (calculate.isError()) {
+        cout<< "Error!"<<endl;
+    } else {
+        cout<<calculate.getAnswer()<<endl;
+    }
 
 }

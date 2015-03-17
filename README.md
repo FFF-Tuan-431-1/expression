@@ -1,9 +1,5 @@
 # 文档
 
-## 注意事项
-
-- 在Calculate模块的getSuffix()方法中，使用了c++11的to_string()方法
-
 ## 测试文件
 
 ````
@@ -125,5 +121,8 @@ public:
 
     //判断是否为右括号
     static bool isRightBracket(char ch);
+
+     //将int转换成string类型
+        static std::string intToString(int number);
 
 ````

@@ -2,6 +2,8 @@
 // Created by xiaowei on 2015/3/15.
 //
 
+#include <winsock.h>
+#include <sstream>
 #include "Util.h"
 
 
@@ -31,4 +33,10 @@ bool Util::isRightBracket(char ch) {
         return true;
     else
         return false;
+}
+
+std::string Util::intToString(int number) {
+    std::stringstream t;
+    t << number;
+    return t.str();
 }

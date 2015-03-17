@@ -5,6 +5,7 @@
 #include "Calculate.h"
 #include "Suffix.h"
 #include "Check.h"
+#include "Util.h"
 
 #include<stack>
 #include<string>
@@ -75,7 +76,7 @@ string Calculate::getSuffix() {
     string suffixString;
     for (int i = 0; i < suffixExpression.size() ; i++) {
        if (suffixExpression[i].isNumber()) {
-           suffixString += to_string(suffixExpression[i].number);
+           suffixString += Util::intToString(suffixExpression[i].number);
        }
        else {
            suffixString += suffixExpression[i].opt;

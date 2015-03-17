@@ -10,16 +10,16 @@ test.cpp, 用于测试Calculate类的行为
 ````
 public:
     //判断是否为数字
-    static bool checkNum(char ch);
+    static bool isNumber(char ch);
 
     //判断是否为操作符
-    static bool checkOperator(char ch);
+    static bool isOperator(char ch);
 
     //判断是否为左括号
-    static bool checkLBracket(char ch);
+    static bool isLeftBracket(char ch);
 
     //判断是否为右括号
-    static bool checkRBracket(char ch);
+    static bool isRightBracket(char ch);
 
 ````
 
@@ -30,7 +30,7 @@ public:
     Suffix(string s);
 
     //实行将中缀表达式转变成后缀表达式
-    string change();
+    string getSuffix();
 
 private:
     //将要被转后缀的中缀表达式
@@ -40,7 +40,7 @@ private:
     bool checkStack(char ch, stack<char> tempStack);
 
     //比较这两个操作符的优先级
-    bool checkPriority(char one, char two);
+    bool checkPriority(char first, char second);
 
     //获取当前操作符的优先级别
     int getPriority(char temp);
@@ -71,6 +71,7 @@ private:
 
     //当前字符为右括号的状态
     bool stateRBra(int i, int &lb);
+
 ````
 
 ## class Calculate //自定义计算器类
@@ -97,5 +98,5 @@ private:
 
     //计算数值a和数值b的(operate)操作
     int calculate(char opera, int a, int b);
-
+    
 ````

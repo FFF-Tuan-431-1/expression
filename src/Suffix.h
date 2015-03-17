@@ -7,29 +7,26 @@
 
 #include<string>
 #include<stack>
+#include<vector>
+
+#include "Cell.h"
 
 using namespace std;
 
 class Suffix {
 public:
     //构造函数
-    Suffix(string s);
+    Suffix(string infix);
 
     //实行将中缀表达式转变成后缀表达式
-    string getSuffix();
+    vector<Cell> getSuffix();
 
 private:
-    //将要被转后缀的中缀表达式
-    string infix;
+    //将要被转后缀的中缀表达式（以数组形式存储）
+    vector<Cell> infix;
 
     //判断是否将当前的操作符入栈
-    bool checkStack(char ch, stack<char> tempStack);
-
-    //比较这两个操作符的优先级
-    bool checkPriority(char first, char second);
-
-    //获取当前操作符的优先级别
-    int getPriority(char temp);
+    bool checkStack(Cell optCell, stack<Cell> tempStack);
 };
 
 

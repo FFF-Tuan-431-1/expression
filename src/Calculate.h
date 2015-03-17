@@ -28,9 +28,6 @@ private:
     //输入的将要被求值的中缀表达式
     string infix;
 
-    //将字符类型的数字转换成整型
-    int charToInt(char ch);
-
     //计算数值a和数值b的(operate)操作
     int calculate(char opera, int a, int b);
 };

@@ -3,72 +3,50 @@
 //
 
 #include "Suffix.h"
+#include "Cell.h"
 #include "Util.h"
 
 #include<stack>
 #include<string>
 
+#include <iostream>
+
 using namespace std;
 
-bool Suffix::checkStack(char ch, stack<char> tempStack) {
-    if (tempStack.empty() || checkPriority(ch, tempStack.top()))
-        return true;
-    else
-        return false;
+bool Suffix::checkStack(Cell optCell, stack<Cell> tempStack) {
+    return tempStack.empty() || Cell::checkPriority(optCell, tempStack.top());
 }
-
-bool Suffix::checkPriority(char first, char second) {
-    if (getPriority(first) > getPriority(second))
-        return true;
-    else
-        return false;
-}
-
-
-int Suffix::getPriority(char temp) {
-    int priority = 0;
-    switch (temp) {
-        case '+' :
-            priority = 1;
-            break;
-        case '-' :
-            priority = 1;
-            break;
-        case '*' :
-            priority = 2;
-            break;
-        case '/' :
-            priority = 2;
-            break;
-        case '(' :
-            priority = 3;
-            break;
-        case ')' :
-            priority = 3;
-            break;
-        default :
-            break;
-    }
-    return priority;
-}
-
 
 Suffix::Suffix(string s) {
-    infix = s;
+    for (int i = 0; i < s.size(); i++) {
+        if (Util::isNumber(s[i])) {
+            if(!infix.empty() && infix.back().isNumber()) {
+                infix.back().number = infix.back().number * 10 + (s[i] - '0');
+            }
+            else {
+                infix.push_back(Cell(s[i] - '0'));
+            }
+        }
+        else {
+            infix.push_back(Cell(s[i]));
+        }
+    }
 }
 
-string Suffix::getSuffix() {
-    string suffix = infix;
+vector<Cell> Suffix::getSuffix() {
+    vector<Cell> suffix(infix);
+
     int j = 0;
-    stack<char> operatorStack;
-    for (int i = 0; infix[i] != '#'; i++) {
-        if (Util::isNumber(infix[i])) {
+    stack<Cell> operatorStack;
+
+    for (int i = 0; i < infix.size(); i++) {
+        if (infix[i].isNumber()) {
             suffix[j] = infix[i];
             j++;
         }
         else {
-            if (!Util::isRightBracket(infix[i])) {
-                while (!checkStack(infix[i], operatorStack) && operatorStack.top() != '(') {
+            if (!infix[i].isRightBracket()) {
+                while (!checkStack(infix[i], operatorStack) && !operatorStack.top().isLeftBracket()) {
                     suffix[j] = operatorStack.top();
                     j++;
                     operatorStack.pop();
@@ -77,7 +55,7 @@ string Suffix::getSuffix() {
                 operatorStack.push(infix[i]);
             }
             else {
-                while (operatorStack.top() != '(') {
+                while (!operatorStack.top().isLeftBracket()) {
                     suffix[j] = operatorStack.top();
                     j++;
                     operatorStack.pop();
@@ -92,13 +70,9 @@ string Suffix::getSuffix() {
         operatorStack.pop();
     }
 
-    suffix[j] = '@';
+    suffix.resize(j - 1);
 
-    int size = suffix.find('@', 0);
-    string subSuffix = suffix.substr(0, size);
-    subSuffix += '#';
-
-    return subSuffix;
+    return suffix;
 }
 
 

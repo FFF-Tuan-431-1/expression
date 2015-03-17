@@ -5,6 +5,7 @@
 
 #include "Check.h"
 #include "Util.h"
+#include "Cell.h"
 #include<string>
 
 using namespace std;
@@ -15,7 +16,10 @@ bool Check::stateNum(int i, int &lb) {
     i++;
 
     if (infix[i] != '#') {
-        if (Util::isOperator(infix[i])) {
+        if (Util::isNumber(infix[i])) {
+            error = stateNum(i, lb);
+        }
+        else if (Util::isOperator(infix[i])) {
             error = stateOper(i, lb);
         }
         else if (Util::isRightBracket(infix[i])) {

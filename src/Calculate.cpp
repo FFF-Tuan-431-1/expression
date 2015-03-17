@@ -6,18 +6,13 @@
 #include "Util.h"
 #include "Suffix.h"
 #include "Check.h"
+#include "Cell.h"
 
 #include<stack>
 #include<string>
 #include<iostream>
 
 using namespace std;
-
-int Calculate::charToInt(char ch) {
-    int num;
-    num = (int) (ch - '0');
-    return num;
-}
 
 int Calculate::calculate(char opera, int a, int b) {
     int result = 0;
@@ -53,16 +48,17 @@ int Calculate::getAnswer() {
     stack<int> numberStack;
 
     Suffix suffix(infix);
-    string suffixExpression = suffix.getSuffix();
-    for (int i = 0; suffixExpression[i] != '#'; i++) {
-        if (Util::isNumber(suffixExpression[i]))
-            numberStack.push(charToInt(suffixExpression[i]));
+    vector<Cell> suffixExpression = suffix.getSuffix();
+
+    for (int i = 0; i < suffixExpression.size() ; i++) {
+        if (suffixExpression[i].isNumber())
+            numberStack.push(suffixExpression[i].number);
         else {
             int b = numberStack.top();
             numberStack.pop();
             int a = numberStack.top();
             numberStack.pop();
-            numberStack.push(calculate(suffixExpression[i], a, b));
+            numberStack.push(calculate(suffixExpression[i].opt, a, b));
         }
     }
 

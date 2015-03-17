@@ -8,16 +8,16 @@
 
 class Util {
 public:
-    //ÅĞ¶ÏÊÇ·ñÎªÊı×Ö
+    //åˆ¤æ–­æ˜¯å¦ä¸ºæ•°å­—
     static bool checkNum(char ch);
 
-    //ÅĞ¶ÏÊÇ·ñÎª²Ù×÷·û
+    //åˆ¤æ–­æ˜¯å¦ä¸ºæ“ä½œç¬¦
     static bool checkOperator(char ch);
 
-    //ÅĞ¶ÏÊÇ·ñÎª×óÀ¨ºÅ
+    //åˆ¤æ–­æ˜¯å¦ä¸ºå·¦æ‹¬å·
     static bool checkLBracket(char ch);
 
-    //ÅĞ¶ÏÊÇ·ñÎªÓÒÀ¨ºÅ
+    //åˆ¤æ–­æ˜¯å¦ä¸ºå³æ‹¬å·
     static bool checkRBracket(char ch);
 };
 

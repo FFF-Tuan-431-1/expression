@@ -7,6 +7,7 @@
 
 #include<string>
 #include<stack>
+#include<vector>
 
 using namespace std;
 
@@ -20,6 +21,9 @@ public:
 
     //计算当前后缀表达式的值
     int getAnswer();
+
+    //返回后缀表达式
+    string getSuffix();
 
     //判断算式是否错误
     bool isError();

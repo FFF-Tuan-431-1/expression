@@ -18,7 +18,8 @@ public:
     Cell();
     Cell(int t_num);
     Cell(char t_opt);
-    
+
+    //判断方法
     bool isNumber();
     bool isOperator();
     bool isLeftBracket();
@@ -29,7 +30,6 @@ public:
 private:
     //获取操作符优先级
     int getPriority();
-
 };
 
 

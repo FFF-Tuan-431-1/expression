@@ -3,10 +3,8 @@
 //
 
 #include "Calculate.h"
-#include "Util.h"
 #include "Suffix.h"
 #include "Check.h"
-#include "Cell.h"
 
 #include<stack>
 #include<string>
@@ -70,3 +68,19 @@ bool Calculate::isError() {
     return  !check.checkError();
 }
 
+string Calculate::getSuffix() {
+    Suffix suffix(infix);
+    vector<Cell> suffixExpression = suffix.getSuffix();
+
+    string suffixString;
+    for (int i = 0; i < suffixExpression.size() ; i++) {
+       if (suffixExpression[i].isNumber()) {
+           suffixString += to_string(suffixExpression[i].number);
+       }
+       else {
+           suffixString += suffixExpression[i].opt;
+       }
+       suffixString += " ";
+    }
+    return suffixString;
+}

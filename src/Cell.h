@@ -2,8 +2,8 @@
 // Created by NiL on 15/3/17.
 //
 
-#ifndef _COLLEGETWO_CELL_H_
-#define _COLLEGETWO_CELL_H_
+#ifndef _EXPRESSION_CELL_H_
+#define _EXPRESSION_CELL_H_
 
 
 class Cell {
@@ -33,4 +33,4 @@ private:
 };
 
 
-#endif //_COLLEGETWO_CELL_H_
+#endif //_EXPRESSION_CELL_H_

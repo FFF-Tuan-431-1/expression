@@ -2,8 +2,8 @@
 // Created by xiaowei on 2015/3/15.
 //
 
-#ifndef _COLLEGETWO_SUFFIX_H_
-#define _COLLEGETWO_SUFFIX_H_
+#ifndef _EXPRESSION_SUFFIX_H_
+#define _EXPRESSION_SUFFIX_H_
 
 #include<string>
 #include<stack>
@@ -30,4 +30,4 @@ private:
 };
 
 
-#endif //_COLLEGETWO_SUFFIX_H_
+#endif //_EXPRESSION_SUFFIX_H_

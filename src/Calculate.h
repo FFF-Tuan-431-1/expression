@@ -2,8 +2,8 @@
 // Created by xiaowei on 2015/3/15.
 //
 
-#ifndef _COLLEGETWO_CALCULATE_H_
-#define _COLLEGETWO_CALCULATE_H_
+#ifndef _EXPRESSION_CALCULATE_H_
+#define _EXPRESSION_CALCULATE_H_
 
 #include<string>
 #include<stack>
@@ -37,4 +37,4 @@ private:
 };
 
 
-#endif //_COLLEGETWO_CALCULATE_H_
+#endif //_EXPRESSION_CALCULATE_H_

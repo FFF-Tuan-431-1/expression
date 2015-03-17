@@ -2,8 +2,8 @@
 // Created by xiaowei on 2015/3/15.
 //
 
-#ifndef _COLLEGETWO_UTIL_H_
-#define _COLLEGETWO_UTIL_H_
+#ifndef _EXPRESSION_UTIL_H_
+#define _EXPRESSION_UTIL_H_
 
 
 class Util {
@@ -22,4 +22,4 @@ public:
 };
 
 
-#endif //_COLLEGETWO_UTIL_H_
+#endif //_EXPRESSION_UTIL_H_

@@ -2,8 +2,8 @@
 // Created by xiaowei on 2015/3/15.
 //
 
-#ifndef _COLLEGETWO_CHECK_H_
-#define _COLLEGETWO_CHECK_H_
+#ifndef _EXPRESSION_CHECK_H_
+#define _EXPRESSION_CHECK_H_
 
 #include<string>
 
@@ -35,4 +35,4 @@ private:
 };
 
 
-#endif //_COLLEGETWO_CHECK_H_
+#endif //_EXPRESSION_CHECK_H_

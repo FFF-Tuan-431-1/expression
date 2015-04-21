@@ -2,7 +2,6 @@
 // Created by xiaowei on 2015/3/15.
 //
 
-#include <winsock.h>
 #include <sstream>
 #include "Util.h"
 

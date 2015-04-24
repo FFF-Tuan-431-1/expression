@@ -34,6 +34,23 @@ bool Util::isRightBracket(char ch) {
         return false;
 }
 
+int Util::getPriority(char opt)
+{
+    switch(opt)
+    {
+        case '(':
+            return 1; break;
+        case '+':
+        case '-':
+            return 2; break;
+        case '*':
+        case '/':
+            return 3; break;
+        default:
+            return 0;
+    }
+}
+
 std::string Util::intToString(int number) {
     std::stringstream t;
     t << number;

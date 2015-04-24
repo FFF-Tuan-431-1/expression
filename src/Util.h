@@ -22,6 +22,9 @@ public:
     //判断是否为右括号
     static bool isRightBracket(char ch);
 
+    //返回优先级
+    static int getPriority(char op);
+
     //将int转换成string类型
     static std::string intToString(int number);
 };

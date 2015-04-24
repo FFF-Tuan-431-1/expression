@@ -31,36 +31,5 @@ bool Cell::isRightBracket() {
     return opt == ')';
 }
 bool Cell::isOperator() {
-    return !number && !isRightBracket() && !isLeftBracket();
-}
-
-int Cell::getPriority() {
-    int priority = 0;
-    switch (opt) {
-        case '+' :
-            priority = 1;
-            break;
-        case '-' :
-            priority = 1;
-            break;
-        case '*' :
-            priority = 2;
-            break;
-        case '/' :
-            priority = 2;
-            break;
-        case '(' :
-            priority = 3;
-            break;
-        case ')' :
-            priority = 3;
-            break;
-        default :
-            break;
-    }
-    return priority;
-}
-
-bool Cell::checkPriority(Cell first, Cell second) {
-    return  first.getPriority() > second.getPriority();
+    return number == -1 && !isRightBracket() && !isLeftBracket();
 }

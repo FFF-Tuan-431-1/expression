@@ -13,66 +13,107 @@
 
 using namespace std;
 
-bool Suffix::checkStack(Cell optCell, stack<Cell> tempStack) {
-    return tempStack.empty() || Cell::checkPriority(optCell, tempStack.top());
+Suffix::Suffix(string infix): infix(infix) {
+
+    m_tree = NULL;
+    m_tree = createTree();
 }
 
-Suffix::Suffix(string s) {
-    for (int i = 0; i < s.size(); i++) {
-        if (Util::isNumber(s[i])) {
-            if(!infix.empty() && infix.back().isNumber()) {
-                infix.back().number = infix.back().number * 10 + (s[i] - '0');
+Node * Suffix::createTree() {
+    stack<char> operatorStack;
+    stack<Node *> treeStack;
+
+    int i = 0;
+    int temp = -1;
+    char ch = infix[i++];
+
+    while(operatorStack.size()!=0 || ch != '#') {
+        if (ch != '#' && Util::isNumber(ch)) {
+            if (temp == -1) temp = 0;
+            temp = temp * 10 + ch - '0';
+            ch = infix[i++];
+        } else {
+            if (temp != -1) {
+                Node * p = new Node;
+                p->data = Cell(temp);
+                temp = -1;
+                treeStack.push(p);
             }
-            else {
-                infix.push_back(Cell(s[i] - '0'));
+            switch (ch) {
+                case '(':
+                    operatorStack.push('(');
+                    ch = infix[i++];
+                    break;
+                case ')':
+                    while (true) {
+                        char tmp = operatorStack.top();
+                        operatorStack.pop();
+                        if (tmp == '(') {
+                            break;
+                        }
+
+                        Node * p = new Node;
+                        p->data = Cell(tmp);
+                        if (treeStack.size()) {
+                            p->right = treeStack.top();
+                            treeStack.pop();
+                        }
+                        if (treeStack.size()) {
+                            p->left = treeStack.top();
+                            treeStack.pop();
+                        }
+                        treeStack.push(p);
+                    }
+                    ch = infix[i++];
+                    break;
+                default:
+                    if (operatorStack.size() == 0 || ch != '#' && Util::getPriority(operatorStack.top()) < Util::getPriority(ch)) {
+                        operatorStack.push(ch);
+                        ch = infix[i++];
+                    } else {
+                        Node * p = new Node;
+                        p->data = Cell(operatorStack.top());
+                        operatorStack.pop();
+
+                        if (treeStack.size()) {
+                            p->right = treeStack.top();
+                            treeStack.pop();
+                        }
+                        if (treeStack.size()) {
+                            p->left = treeStack.top();
+                            treeStack.pop();
+                        }
+                        treeStack.push(p);
+                    }
+
             }
-        }
-        else {
-            infix.push_back(Cell(s[i]));
         }
     }
+
+    if (temp != -1) {
+        Node * p = new Node;
+        p->data = Cell(temp);
+        temp = 0;
+        treeStack.push(p);
+    }
+
+    return treeStack.top();
+
 }
+
+void Suffix::lastSearch(Node *tree, vector<Cell> & suffix) {
+    if (tree == NULL) return;
+
+    lastSearch(tree->left, suffix);
+    lastSearch(tree->right, suffix);
+    suffix.push_back(tree->data);
+
+}
+
 
 vector<Cell> Suffix::getSuffix() {
-    vector<Cell> suffix(infix);
-
-    int j = 0;
-    stack<Cell> operatorStack;
-
-    for (int i = 0; i < infix.size(); i++) {
-        if (infix[i].isNumber()) {
-            suffix[j] = infix[i];
-            j++;
-        }
-        else {
-            if (!infix[i].isRightBracket()) {
-                while (!checkStack(infix[i], operatorStack) && !operatorStack.top().isLeftBracket()) {
-                    suffix[j] = operatorStack.top();
-                    j++;
-                    operatorStack.pop();
-
-                }
-                operatorStack.push(infix[i]);
-            }
-            else {
-                while (!operatorStack.top().isLeftBracket()) {
-                    suffix[j] = operatorStack.top();
-                    j++;
-                    operatorStack.pop();
-                }
-                operatorStack.pop();
-            }
-        }
-    }
-    while (!operatorStack.empty()) {
-        suffix[j] = operatorStack.top();
-        j++;
-        operatorStack.pop();
-    }
-
-    suffix.resize(j - 1);
-
+    vector<Cell> suffix;
+    Node * tree = m_tree;
+    lastSearch(tree, suffix);
     return suffix;
 }
-
-

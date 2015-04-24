@@ -24,12 +24,6 @@ public:
     bool isOperator();
     bool isLeftBracket();
     bool isRightBracket();
-
-    //比较操作符优先级
-    static bool checkPriority(Cell first, Cell second);
-private:
-    //获取操作符优先级
-    int getPriority();
 };
 
 

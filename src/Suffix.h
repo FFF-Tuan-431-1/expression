@@ -13,6 +13,11 @@
 
 using namespace std;
 
+struct Node {
+    struct Node * left = NULL, * right = NULL;
+    struct Cell data = Cell();
+};
+
 class Suffix {
 public:
     //构造函数
@@ -23,10 +28,15 @@ public:
 
 private:
     //将要被转后缀的中缀表达式（以数组形式存储）
-    vector<Cell> infix;
+    string infix;
+    Node * createTree();
+    bool visited[10000] = {false};
+    void lastSearch(Node *tree, vector<Cell> & suffix);
 
-    //判断是否将当前的操作符入栈
-    bool checkStack(Cell optCell, stack<Cell> tempStack);
+    //bool checkStack(Cell optCell, stack<Cell> tempStack);
+
+    int getPriority(char opt);
+    Node * m_tree;
 };
 
 
